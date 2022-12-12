@@ -1,0 +1,119 @@
+*{
+    background-color: aliceblue;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.inputSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('./images/globe-2.jpg');
+    background-size: 100% 100%;
+    padding: 80px;
+    max-width: 850px;
+    margin: auto;
+    
+}
+#mainHeader, #subHeader, .searchInfo{
+    color: white;
+    text-align-last: justify;
+    background: rgba(0,0, 0, 0);
+}
+.searchTerm{
+    color: red;
+}
+.itemNumbers{
+    color: green;
+}
+
+.threeButtons{
+    padding:  20px;
+    background: rgba(0,0, 0, 0);
+}
+
+button{
+    color: white;
+    background-color: rgb(133, 50, 133);
+    border: none;
+    padding: 10px;
+    border-radius: 9%;
+    filter: drop-shadow(1px 1px 1px #222);
+}
+
+button:hover{
+    background-color: purple;
+    filter: none;
+    cursor: pointer;
+}
+
+.search{
+    background: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+}
+.searchBar{
+    width: 400px;
+    height: 30px;
+    border: none;
+    border-radius: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  .icon{
+    margin: 0 13px;
+  }
+
+  .searchIcon {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 26px;
+    height: 26px;
+    border: 6px solid gray;
+    border-radius: 100%;
+    margin-left: -4px;
+    margin-top: -4px;
+}
+.searchIcon::after {
+    content: "";
+    color: grey;
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 3px;
+    width: 8px;
+    height: 13px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    top: 12px;
+    left: 12px;
+}
+.outputSection{
+    display: flex;
+    max-width: 1010px;
+    margin: 20px auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.countryTile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+    border: none;
+    background-image: url('./images/map_image.jpg');
+    background-size: 100% 100%;
+    text-align: center;
+    font-weight: bolder;
+    margin: 15px;
+    filter: drop-shadow(4px 4px 6px black);
+}
