@@ -1,8 +1,11 @@
 const { MongoClient } = require("mongodb");
+(f = require("util").format), (fs = require("fs"));
 
+const username = "warwolfv07";
 const password = "warwolfv07";
-//const dbConnectionURI =  "mongodb://localhost:27017/?readPreference=primary&ssl=false&directConnection=true";
-const dbConnectionURI = `mongo --ssl --host docdb-2022-12-13-23-29-17.cluster-c4nyyvqcb1ro.ap-south-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username warwolfv07 --password ${password}`;
+const dbConnectionURI =
+  "mongodb://warwolfv07:warwolfv07@docdb-2022-12-13-23-29-17.cluster-c4nyyvqcb1ro.ap-south-1.docdb.amazonaws.com:27017/?tls=true&tlsCAFile=rds-combined-ca-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false";
+//const dbConnectionURI = `mongo --ssl --host docdb-2022-12-13-23-29-17.cluster-c4nyyvqcb1ro.ap-south-1.docdb.amazonaws.com:27017 --sslCAFile rds-combined-ca-bundle.pem --username warwolfv07 --password ${password}`;
 
 const dbName = "database1";
 const collection = "countries_data";
@@ -35,8 +38,14 @@ module.exports = async function dbQuery(searchObject) {
 };
 
 async function mongoConnect(regex) {
-  const client = new MongoClient(dbConnectionURI);
-  //const client = new MongoClient(dbConnectionURI, {tlsCAFile: `rds-combined-ca-bundle.pem`,});
+  //const client = new MongoClient(dbConnectionURI);
+  const client = new MongoClient(dbConnectionURI, {
+    tlsCAFile: `rds-combined-ca-bundle.pem`,
+    auth: {
+      username,
+      password,
+    },
+  });
   try {
     await client.connect();
     const queriedData = await client
