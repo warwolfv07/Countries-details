@@ -1,4 +1,5 @@
 //const { request, response } = require("express");
+const { request, response } = require("express");
 const express = require("express");
 const dbQuery = require("./DBConnect.cjs");
 
@@ -16,5 +17,13 @@ app.post("/api", async (request, response) => {
   response.json({
     nameArray: queryResults.nameArray,
     totalDocs: queryResults.totalDocs,
+  });
+});
+
+app.post("/full", async (request, response) => {
+  const queryResults = await dbQuery(request.body);
+
+  response.json({
+    data: queryResults.dataObj,
   });
 });

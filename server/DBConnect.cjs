@@ -33,6 +33,10 @@ module.exports = async function dbQuery(searchObject) {
     });
     const totalDocs = dataObj.totalDocuments;
     return { nameArray, totalDocs };
+  } else if (searchObject.option == "full") {
+    regex = new RegExp("^" + searchObject.clickedCountry + "$");
+    const dataObj = await mongoConnect(regex);
+    return { dataObj };
   }
 };
 
