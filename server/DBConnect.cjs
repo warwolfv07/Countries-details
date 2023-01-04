@@ -14,7 +14,7 @@ module.exports = async function dbQuery(searchObject) {
   const nameArray = [];
 
   if (searchObject.option == "starts_with") {
-    regex = new RegExp("^" + searchObject.searchValue);
+    regex = new RegExp("^" + escapeRegex(searchObject.searchValue));
     const dataObj = await mongoConnect(regex);
 
     dataObj.queriedData.forEach((document) => {
@@ -25,7 +25,7 @@ module.exports = async function dbQuery(searchObject) {
 
     //queryDatabase()
   } else if (searchObject.option == "includes") {
-    regex = new RegExp(searchObject.searchValue);
+    regex = new RegExp(escapeRegex(searchObject.searchValue));
     const dataObj = await mongoConnect(regex);
 
     dataObj.queriedData.forEach((document) => {
@@ -34,7 +34,7 @@ module.exports = async function dbQuery(searchObject) {
     const totalDocs = dataObj.totalDocuments;
     return { nameArray, totalDocs };
   } else if (searchObject.option == "full") {
-    regex = new RegExp("^" + searchObject.clickedCountry + "$");
+    regex = new RegExp("^" + escapeRegex(searchObject.clickedCountry) + "$");
     const dataObj = await mongoConnect(regex);
     return { dataObj };
   }
@@ -58,7 +58,7 @@ async function mongoConnect(regex) {
     const totalDocuments = await client
       .db(dbName)
       .collection(collection)
-      .count({});
+      .countDocuments({});
 
     return { queriedData, totalDocuments };
   } catch (e) {
@@ -67,4 +67,8 @@ async function mongoConnect(regex) {
   } finally {
     await client.close();
   }
+}
+
+function escapeRegex(string) {
+  return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
 }
